@@ -1,15 +1,14 @@
 package pageObjects;
 
-import AbstractComponents.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 
-public class CheckoutStepOnePage extends AbstractComponent {
+public class CheckoutFirstPage extends BasePage {
     WebDriver driver;
-    public CheckoutStepOnePage(WebDriver driver) {
+    public CheckoutFirstPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);

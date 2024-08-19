@@ -25,40 +25,40 @@ public class LoginTest extends Base {
     }
     @Test(priority = 1)
     public void verifyLoginWithValidCredentials() {
-        loginPage.completeLogin(prop.getProperty("validUsername"), prop.getProperty("validPassword"));
+        loginPage.login(testUserData.getValidUser().username(), testUserData.getValidUser().password());
         Assert.assertTrue(loginPage.getMainHeadingText().contains("Swag Labs"), "Expected Heading Text is not displayed");
     }
     @Test(priority = 2)
     public void verifyLoginWithInvalidCredentials() {
-        loginPage.completeLogin(dataProp.getProperty("invalidUsername"), dataProp.getProperty("invalidPassword"));
-        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(dataProp.getProperty("usernameAndPasswordWarningText")));
+        loginPage.login(testUserData.getInvalidUser().username(), testUserData.getInvalidUser().password());
+        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(prop.getProperty("usernameAndPasswordWarningText")));
     }
     @Test(priority = 3)
     public void verifyLoginWithoutProvidingAnyCredentials() {
         loginPage.clickOnLoginButton();
-        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(dataProp.getProperty("usernameRequiredWarningText")));
+        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(prop.getProperty("usernameRequiredWarningText")));
     }
     @Test(priority = 4)
     public void verifyLoginProvidingOnlyUsername() {
-        loginPage.enterUsername(prop.getProperty("validUsername"));
+        loginPage.enterUsername(testUserData.getValidUser().username());
         loginPage.clickOnLoginButton();
-        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(dataProp.getProperty("passwordRequiredWarningText")));
+        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(prop.getProperty("passwordRequiredWarningText")));
     }
     @Test(priority = 5)
     public void verifyLoginProvidingOnlyPassword() {
-        loginPage.enterPassword(prop.getProperty("validPassword"));
+        loginPage.enterPassword(testUserData.getValidUser().password());
         loginPage.clickOnLoginButton();
-        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(dataProp.getProperty("usernameRequiredWarningText")));
+        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(prop.getProperty("usernameRequiredWarningText")));
     }
     @Test(priority = 6)
     public void verifyLoginWithValidUsernameAndInvalidPassword() {
-        loginPage.completeLogin(prop.getProperty("validUsername"), dataProp.getProperty("invalidPassword"));
-        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(dataProp.getProperty("usernameAndPasswordWarningText")));
+        loginPage.login(testUserData.getValidUser().username(), testUserData.getInvalidUser().password());
+        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(prop.getProperty("usernameAndPasswordWarningText")));
     }
     @Test(priority = 7)
     public void verifyLoginWithInvalidUsernameAndValidPassword() {
-        loginPage.completeLogin(dataProp.getProperty("invalidUsername"), prop.getProperty("validPassword"));
-        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(dataProp.getProperty("usernameAndPasswordWarningText")));
+        loginPage.login(testUserData.getInvalidUser().username(), testUserData.getValidUser().password());
+        Assert.assertTrue(loginPage.getUsernameAndPasswordWarningText().contains(prop.getProperty("usernameAndPasswordWarningText")));
     }
 
 }

@@ -1,5 +1,6 @@
 package base;
 
+import dataHelpers.TestUserData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -14,14 +15,13 @@ import java.util.Properties;
 public class Base {
     WebDriver driver;
     public Properties prop;
-    public Properties dataProp;
+    public TestUserData testUserData;
 
     public Base() {
         prop = new Properties();
         File propFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\config\\config.properties");
         FileInputStream fis;
 
-        dataProp = new Properties();
         File dataPropFile = new File(System.getProperty("user.dir") + "\\src\\main\\java\\testData\\testdata.properties");
         FileInputStream fis1;
 
@@ -33,10 +33,11 @@ public class Base {
         }
         try {
             prop.load(fis);
-            dataProp.load(fis1);
+            prop.load(fis1);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        testUserData = new TestUserData(prop);
     }
 
     public WebDriver initializeBrowserAndOpenApplication(String browserName) {

@@ -1,6 +1,5 @@
 package pageObjects;
 
-import AbstractComponents.AbstractComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class CartPage extends AbstractComponent {
+public class CartPage extends BasePage {
     WebDriver driver;
     public CartPage(WebDriver driver) {
         super(driver);

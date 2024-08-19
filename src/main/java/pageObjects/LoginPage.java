@@ -1,12 +1,11 @@
 package pageObjects;
 
-import AbstractComponents.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends AbstractComponent {
+public class LoginPage extends BasePage {
     WebDriver driver;
 
     public LoginPage(WebDriver driver) {
@@ -43,7 +42,7 @@ public class LoginPage extends AbstractComponent {
     }
 
     //Complete Valid Login
-    public void completeLogin(String usernameText, String passwordText) {
+    public void login(String usernameText, String passwordText) {
         username.sendKeys(usernameText);
         password.sendKeys(passwordText);
         loginButton.click();

@@ -12,8 +12,8 @@ public class CheckoutTest extends Base {
     public WebDriver driver;
     LoginPage loginPage;
     ProductsPage productsPage;
-    CheckoutStepOnePage checkoutStepOnePage;
-    CheckoutStepTwoPage checkoutStepTwoPage;
+    CheckoutFirstPage checkoutStepOnePage;
+    CheckoutSecondPage checkoutStepTwoPage;
     CartPage cartPage;
     SuccessPage successPage;
     public CheckoutTest() {
@@ -26,11 +26,11 @@ public class CheckoutTest extends Base {
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
-        checkoutStepOnePage = new CheckoutStepOnePage(driver);
-        checkoutStepTwoPage = new CheckoutStepTwoPage(driver);
+        checkoutStepOnePage = new CheckoutFirstPage(driver);
+        checkoutStepTwoPage = new CheckoutSecondPage(driver);
         successPage = new SuccessPage(driver);
 
-        loginPage.completeLogin(prop.getProperty("validUsername"), (prop.getProperty("validPassword")));
+        loginPage.login(prop.getProperty("validUsername"), (prop.getProperty("validPassword")));
 
         Assert.assertTrue(loginPage.getMainHeadingText().contains("Swag Labs"), "Expected Heading Text is not displayed");
 
@@ -43,7 +43,7 @@ public class CheckoutTest extends Base {
 
     @Test(priority = 1)
     public void verifySelectingASingleProductsFromProductsPageAndAddToCart() {
-        productsPage.addProductToCart(dataProp.getProperty("validProductName"));
+        productsPage.addProductToCart(prop.getProperty("validProductName"));
     }
     @Test(priority = 2)
     public void verifyClickingOnCartIconWithoutSelectingAProduct() {
@@ -68,33 +68,33 @@ public class CheckoutTest extends Base {
     }
     @Test(priority = 5)
     public void verifyBillingSectionWithoutProvidingAnyCredentials() {
-        productsPage.addProductToCart(dataProp.getProperty("validProductName"));
+        productsPage.addProductToCart(prop.getProperty("validProductName"));
         productsPage.redirectToCartPage();
-        Assert.assertTrue(cartPage.verifyProductDisplay(dataProp.getProperty("validProductName")));
+        Assert.assertTrue(cartPage.verifyProductDisplay(prop.getProperty("validProductName")));
         cartPage.redirectToCheckoutPage();
         checkoutStepOnePage.redirectOnCheckoutStepTwoPage();
-        Assert.assertTrue(checkoutStepOnePage.getCheckoutStepOneErrorMessage().contains(dataProp.getProperty("checkoutStepOneErrorMessage")));
+        Assert.assertTrue(checkoutStepOnePage.getCheckoutStepOneErrorMessage().contains(prop.getProperty("checkoutStepOneErrorMessage")));
     }
     @Test(priority = 6)
     public void verifyAddingASingleProductToCartAndCheckVisibilityOfTheProductInOverviewSection() {
-        productsPage.addProductToCart(dataProp.getProperty("validProductName"));
+        productsPage.addProductToCart(prop.getProperty("validProductName"));
         productsPage.redirectToCartPage();
-        Assert.assertTrue(cartPage.verifyProductDisplay(dataProp.getProperty("validProductName")));
+        Assert.assertTrue(cartPage.verifyProductDisplay(prop.getProperty("validProductName")));
         cartPage.redirectToCheckoutPage();
         checkoutStepOnePage.completeBillingPlaceholders("Aleksandar", "Georgievski", "1000");
-        Assert.assertTrue(checkoutStepTwoPage.verifyProductDisplayFromOverviewList(dataProp.getProperty("validProductName")));
+        Assert.assertTrue(checkoutStepTwoPage.verifyProductDisplayFromOverviewList(prop.getProperty("validProductName")));
     }
     @Test(priority = 7)
     public void verifyAddingASingleProductToCartAndCompleteTheOrder() {
-        productsPage.addProductToCart(dataProp.getProperty("validProductName"));
+        productsPage.addProductToCart(prop.getProperty("validProductName"));
         productsPage.redirectToCartPage();
-        Assert.assertTrue(cartPage.verifyProductDisplay(dataProp.getProperty("validProductName")));
+        Assert.assertTrue(cartPage.verifyProductDisplay(prop.getProperty("validProductName")));
         cartPage.redirectToCheckoutPage();
         checkoutStepOnePage.completeBillingPlaceholders("Aleksandar", "Georgievski", "1000");
-        Assert.assertTrue(checkoutStepTwoPage.verifyProductDisplayFromOverviewList(dataProp.getProperty("validProductName")));
+        Assert.assertTrue(checkoutStepTwoPage.verifyProductDisplayFromOverviewList(prop.getProperty("validProductName")));
         checkoutStepTwoPage.redirectToSuccessPage();
 
-        Assert.assertEquals(successPage.verifySuccessHeaderMessage(), dataProp.getProperty("successHeaderMessage"));
+        Assert.assertEquals(successPage.verifySuccessHeaderMessage(), prop.getProperty("successHeaderMessage"));
         successPage.redirectToProductsPage();
     }
     @Test(priority = 8)
@@ -103,7 +103,7 @@ public class CheckoutTest extends Base {
         cartPage.redirectToCheckoutPage();
         checkoutStepOnePage.completeBillingPlaceholders("Aleksandar", "Georgievski", "1000");
         checkoutStepTwoPage.redirectToSuccessPage();
-        Assert.assertEquals(successPage.verifySuccessHeaderMessage(), dataProp.getProperty("successHeaderMessage"));
+        Assert.assertEquals(successPage.verifySuccessHeaderMessage(), prop.getProperty("successHeaderMessage"));
     }
 }
 

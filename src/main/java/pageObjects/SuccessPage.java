@@ -1,12 +1,11 @@
 package pageObjects;
 
-import AbstractComponents.AbstractComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SuccessPage extends AbstractComponent {
+public class SuccessPage extends BasePage {
     WebDriver driver;
     public SuccessPage(WebDriver driver) {
         super(driver);

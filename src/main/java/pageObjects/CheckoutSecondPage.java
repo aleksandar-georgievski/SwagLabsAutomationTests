@@ -1,6 +1,5 @@
 package pageObjects;
 
-import AbstractComponents.AbstractComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,9 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class CheckoutStepTwoPage extends AbstractComponent {
+public class CheckoutSecondPage extends BasePage {
     WebDriver driver;
-    public CheckoutStepTwoPage(WebDriver driver) {
+    public CheckoutSecondPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);

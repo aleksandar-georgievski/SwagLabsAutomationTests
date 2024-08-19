@@ -1,6 +1,5 @@
 package pageObjects;
 
-import AbstractComponents.AbstractComponent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ProductsPage extends AbstractComponent {
+public class ProductsPage extends BasePage {
     WebDriver driver;
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -25,9 +24,9 @@ public class ProductsPage extends AbstractComponent {
     WebElement selectFirstProductInProductsList;
     @FindBy(css = ".select_container")
     WebElement clickOnSelectContainer;
-    @FindBy(xpath = "//select[@class='product_sort_container']//option[3]")
+    @FindBy(xpath = "//select[@class='product_sort_container']//option[@value='lohi']")
     WebElement selectLowToHigh;
-    @FindBy(xpath = "//select[@class='product_sort_container']//option[4]")
+    @FindBy(xpath = "//select[@class='product_sort_container']//option[@value='hilo']")
     WebElement selectHighToLow;
     @FindBy(css = ".inventory_details_name")
     WebElement productName;
